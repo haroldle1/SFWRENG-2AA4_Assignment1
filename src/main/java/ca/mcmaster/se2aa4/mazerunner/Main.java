@@ -1,12 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import org.apache.logging.log4j.LogManager; //For Log4j
 import org.apache.logging.log4j.Logger;     //For Log4j
 
 import org.apache.commons.cli.*; //Import Apache CLI
+//mvn exec:java -Dexec.mainClass="ca.mcmaster.se2aa4.mazerunner.Main" -Dexec.args="-i examples/<file name>.txt"
+
 
 public class Main {
 
@@ -29,22 +28,12 @@ public class Main {
                 String filePath = cmd.getOptionValue("i");
                 logger.info("Reading the maze from file: "+ filePath);
 
-                //Read the maze file
-                try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-                    String line;
-                    while ((line = reader.readLine()) != null){
-                        for (int idx = 0; idx < line.length(); idx++){
-                            if (line.charAt(idx) == '#'){
-                                System.out.print("WALL ");
-                            } else if (line.charAt(idx) == ' '){
-                                System.out.print("PASS ");
-                            }
-                        }
-                        System.out.print(System.lineSeparator());
-                    }
-                } catch (Exception e){
-                    logger.error("Error reading the maze file.", e);
-                }
+                //Use the maze class to parse and print the maze
+                Maze maze = new Maze(filePath);
+                maze.printMaze();
+                maze.getEntry();
+
+                
             } else {
                 logger.error("No input file provided. Use the -i falg to specify the maze file.");
                 System.out.println("Usage: java -cp <jar> ca.mcmaster.se2aa4.mazerunner.Main -i <maze file>");
