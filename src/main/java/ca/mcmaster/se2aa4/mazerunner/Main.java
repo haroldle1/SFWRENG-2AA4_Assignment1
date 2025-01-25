@@ -33,6 +33,11 @@ public class Main {
                 maze.printMaze();
                 maze.getEntry();
 
+                // Solve the maze using the right-hand rule algorithm
+                Solution solution = new Solution(maze);
+                String path = solution.solveMaze(); // Get the canonical path
+                System.out.println("Canonical Path: " + path); // Output the solution
+                logger.info("Maze solved successfully!");
                 
             } else {
                 logger.error("No input file provided. Use the -i falg to specify the maze file.");
