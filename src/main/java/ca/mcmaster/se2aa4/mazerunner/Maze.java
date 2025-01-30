@@ -15,30 +15,35 @@ public class Maze {
     private int[] exitPoint;
 
     public Maze(String filePath) {
-        parseMaze(filePath);
+        parseMaze(filePath);  // ✅ Ensure `parseMaze()` is called properly
     }
 
     public void parseMaze(String filePath) {
         try {
+            System.out.println("**** Reading the maze from file " + filePath);
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(filePath)); // Read the file line by line
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
 
             while ((line = reader.readLine()) != null) {
-                // If the line is empty, treat it as a row of 'PASS'
-                if (line.trim().isEmpty()) {
-                    lines.add(" ".repeat(cols)); // Add a row of spaces equivalent to the number of columns
-                } else {
-                    lines.add(line);
+                lines.add(line);
+                for (int idx = 0; idx < line.length(); idx++) {
+                    if (line.charAt(idx) == '#') {
+                        System.out.print("WALL ");
+                    } else if (line.charAt(idx) == ' ') {
+                        System.out.print("PASS ");
+                    } 
                 }
+                System.out.println(); 
             }
-            reader.close();
+            reader.close(); 
 
-            // Give the maze 2D list data structure
-            rows = lines.size(); // line is a list of rows of line --> see how many rows it has in this list
-            cols = lines.get(0).length(); // line[0] = line.get(0)
+            // Set maze dimensions
+            rows = lines.size();
+            cols = lines.get(0).length();
             maze = new char[rows][cols];
 
+            // Convert to 2D char array
             for (int i = 0; i < rows; i++) {
                 maze[i] = lines.get(i).toCharArray();
             }
@@ -63,8 +68,7 @@ public class Maze {
         System.out.println("Exit Point: " + Arrays.toString(exitPoint));
     }
 
-    // Print the maze for debugging
-    public void printMaze() {
+    /* public void printMaze() {
         for (char[] row : maze) {
             for (char cell : row) {
                 if (cell == '#') {
@@ -75,7 +79,7 @@ public class Maze {
             }
             System.out.println();
         }
-    }
+    } */
 
     // Getters
     public char[][] getMaze() {

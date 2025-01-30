@@ -4,7 +4,8 @@ import org.apache.logging.log4j.LogManager; //For Log4j
 import org.apache.logging.log4j.Logger;     //For Log4j
 
 import org.apache.commons.cli.*; //Import Apache CLI
-//mvn exec:java -Dexec.mainClass="ca.mcmaster.se2aa4.mazerunner.Main" -Dexec.args="-i examples/<file name>.txt"
+//java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
+
 
 
 public class Main {
@@ -30,14 +31,13 @@ public class Main {
 
                 //Use the maze class to parse and print the maze
                 Maze maze = new Maze(filePath);
-                maze.printMaze();
                 maze.getEntry();
 
                 // Solve the maze using the right-hand rule algorithm
                 Solution solution = new Solution(maze);
                 String path = solution.solveMaze(); // Get the canonical path
-                System.out.println("Canonical Path: " + path); // Output the solution
-                logger.info("Maze solved successfully!");
+                System.out.println("Canonical Path: " + path); 
+                logger.info("Maze solved successfully!"); 
                 
             } else {
                 logger.error("No input file provided. Use the -i falg to specify the maze file.");
