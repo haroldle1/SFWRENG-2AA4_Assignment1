@@ -106,10 +106,36 @@ public class Solution {
         }
     }
 
+    public String factorizePath(String canoPath){
+        if (canoPath.isEmpty()){
+            return "";
+        }
+
+        StringBuilder factorizedPath = new StringBuilder();
+        char currentMove = canoPath.charAt(0);
+        int count = 1;
+        
+        for (int i = 1; i < canoPath.length(); i++) {
+        if (canoPath.charAt(i) == currentMove) {
+            count++;
+        } else {
+            factorizedPath.append(count).append(currentMove).append(" "); //Format space in between
+            currentMove = canoPath.charAt(i);
+            count = 1;
+        }
+    }
+    factorizedPath.append(count).append(currentMove);
+    return factorizedPath.toString();
+       
+    }
+
+
+
     public String solveMaze() {
         while (!isAtExit()) { // Keep moving until the exit is reached
             moveRightHandRule();
         }
-        return path.toString();
+        String canoPath = path.toString();
+        return factorizePath(canoPath);
     }
 }
