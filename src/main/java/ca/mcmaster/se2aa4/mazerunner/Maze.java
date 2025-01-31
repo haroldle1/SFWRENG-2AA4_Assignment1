@@ -15,7 +15,7 @@ public class Maze {
     private int[] exitPoint;
 
     public Maze(String filePath) {
-        parseMaze(filePath);  // ✅ Ensure `parseMaze()` is called properly
+        parseMaze(filePath);  
     }
 
     public void parseMaze(String filePath) {
@@ -68,18 +68,7 @@ public class Maze {
         System.out.println("Exit Point: " + Arrays.toString(exitPoint));
     }
 
-    /* public void printMaze() {
-        for (char[] row : maze) {
-            for (char cell : row) {
-                if (cell == '#') {
-                    System.out.print("WALL ");
-                } else {
-                    System.out.print("PASS ");
-                }
-            }
-            System.out.println();
-        }
-    } */
+    
 
     // Getters
     public char[][] getMaze() {

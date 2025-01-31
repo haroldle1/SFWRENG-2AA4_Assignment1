@@ -11,7 +11,7 @@ public class Solution {
     public Solution(Maze maze) {
         this.maze = maze;
         this.mazeGrid = maze.getMaze();
-        this.position = maze.getEntryPoint(); // Initial position at the entry point
+        this.position = maze.getEntryPoint(); 
         this.exitPoint = maze.getExitPoint();
         this.direction = 1;  // Assume starting by facing right
         this.path = new StringBuilder();
@@ -30,8 +30,8 @@ public class Solution {
 
     private void moveRightHandRule() {
         // direction: 1 = right, 2 = down, 3 = left, 4 = up (clockwise)
-        int x_pos = position[1]; // Current column
-        int y_pos = position[0]; // Current row
+        int x_pos = position[1]; 
+        int y_pos = position[0]; 
 
         while (!isAtExit()) {
             if (direction == 1) { // Facing right
