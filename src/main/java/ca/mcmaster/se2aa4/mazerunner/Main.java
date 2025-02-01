@@ -40,14 +40,14 @@ public class Main {
                     boolean isValid = validator.validatePath(providedPath);
 
                     if (isValid) {
-                        logger.info("The provided path is correct.");
+                        System.out.println("Correct Path");
                     } else {
-                        logger.info("The provided path is incorrect.");
+                        System.out.println("Incorrect Path");
                     }
                 } else {
                     // Solve the maze and print the canonical path
                     String path = solution.solveMaze();
-                    System.out.println("Canonical Path: " + path);
+                    System.out.println("Path: " + path);
                     logger.info("Maze solved successfully!");
                 }
             } else {

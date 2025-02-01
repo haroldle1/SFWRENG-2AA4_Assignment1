@@ -17,21 +17,21 @@ public class MazeReader {
 
     private void parseMaze(String filePath) {
         try {
-            System.out.println("**** Reading the maze from file " + filePath);
             List<String> lines = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
 
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
-                for (int idx = 0; idx < line.length(); idx++) {
+                //Print out Maze
+                /* for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
                         System.out.print("WALL ");
                     } else if (line.charAt(idx) == ' ') {
                         System.out.print("PASS ");
                     }
                 }
-                System.out.println();
+                System.out.println(); */
             }
             reader.close();
 
