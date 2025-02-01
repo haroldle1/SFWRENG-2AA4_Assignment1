@@ -1,23 +1,30 @@
 package ca.mcmaster.se2aa4.mazerunner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.commons.cli.*;
 
 public class PathValidator {
-    private Maze maze;
-    private Solution solution;
+    private SolvingInterface solution;
+    private static final Logger logger = LogManager.getLogger();
 
-    public PathValidator(Maze maze) {
-        this.maze = maze;
-        this.solution = new Solution(maze);
+    public PathValidator(SolvingInterface solution) {
+        this.solution = solution;
     }
 
     public boolean validatePath(String providedPath) {
-        // Solve the maze and get the correct factorized path
+        if (providedPath == null || providedPath.isEmpty()) {
+            logger.error("Path cannot be empty.");
+            return false;
+        }
         String correctPath = solution.solveMaze(); 
 
-        // Compare user-provided factorized path with the correct one
+        if (!Character.isDigit(providedPath.charAt(0))){    //check if provided path is canonical or factorized
+            providedPath = solution.factorizePath(providedPath);  
+        }
         if (providedPath.equals(correctPath)) {
-            return true; // The paths match
+            return true; 
         } else {
-            return false; // The paths do not match
+            return false; 
         }
     }
 }

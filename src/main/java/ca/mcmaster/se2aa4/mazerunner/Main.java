@@ -21,14 +21,14 @@ public class Main {
             // Parse command-line arguments
             CommandLine cmd = parser.parse(options, args);
 
-            // Check if -i (input file) is provided
+            // Check if -i is provided
             if (cmd.hasOption("i")) {
                 String filePath = cmd.getOptionValue("i");
                 logger.info("Reading the maze from file: " + filePath);
 
                 // Load the maze
                 Maze maze = new Maze(filePath);
-                maze.getEntry();
+                SolvingInterface solution = new Solution(maze);
 
                 // If -p flag is provided, validate the given path
                 if (cmd.hasOption("p")) {
@@ -36,19 +36,16 @@ public class Main {
                     logger.info("Validating provided path: " + providedPath);
 
                     // Create a PathValidator instance and validate the path
-                    PathValidator validator = new PathValidator(maze);
+                    PathValidator validator = new PathValidator(solution);
                     boolean isValid = validator.validatePath(providedPath);
 
                     if (isValid) {
                         logger.info("The provided path is correct.");
-                        System.out.println("The provided path is correct.");
                     } else {
-                        logger.error("The provided path is incorrect.");
-                        System.out.println("The provided path is incorrect.");
+                        logger.info("The provided path is incorrect.");
                     }
                 } else {
                     // Solve the maze and print the canonical path
-                    Solution solution = new Solution(maze);
                     String path = solution.solveMaze();
                     System.out.println("Canonical Path: " + path);
                     logger.info("Maze solved successfully!");

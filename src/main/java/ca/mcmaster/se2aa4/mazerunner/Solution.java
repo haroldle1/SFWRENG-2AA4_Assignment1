@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class Solution {
+public class Solution implements SolvingInterface{
     private Maze maze;
     private char[][] mazeGrid;
     private int[] exitPoint;
@@ -24,7 +24,6 @@ public class Solution {
     private boolean isPath(int[] pos) {
         int row = pos[0];
         int col = pos[1];
-        // Ensure the position is within bounds and is a valid path
         return row >= 0 && row < mazeGrid.length && col >= 0 && col < mazeGrid[0].length && mazeGrid[row][col] == ' ';
     }
 
@@ -106,6 +105,7 @@ public class Solution {
         }
     }
 
+    @Override
     public String factorizePath(String canoPath){
         if (canoPath.isEmpty()){
             return "";
@@ -126,11 +126,11 @@ public class Solution {
     }
     factorizedPath.append(count).append(currentMove);
     return factorizedPath.toString();
-       
+
     }
 
 
-
+    @Override
     public String solveMaze() {
         while (!isAtExit()) { // Keep moving until the exit is reached
             moveRightHandRule();
