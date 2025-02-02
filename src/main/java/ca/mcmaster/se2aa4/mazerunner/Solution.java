@@ -21,11 +21,7 @@ public class Solution implements SolvingInterface{
         return position[0] == exitPoint[0] && position[1] == exitPoint[1];
     }
 
-    private boolean isPath(int[] pos) {
-        int row = pos[0];
-        int col = pos[1];
-        return row >= 0 && row < mazeGrid.length && col >= 0 && col < mazeGrid[0].length && mazeGrid[row][col] == ' ';
-    }
+
 
     private void moveRightHandRule() {
         // direction: 1 = right, 2 = down, 3 = left, 4 = up (clockwise)

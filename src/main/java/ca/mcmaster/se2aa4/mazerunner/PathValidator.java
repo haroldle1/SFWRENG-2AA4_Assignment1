@@ -11,6 +11,14 @@ public class PathValidator {
         this.solution = solution;
     }
 
+    private boolean isCano(String providedPath){
+        for (int i = 0; i < providedPath.length(); i++){
+             if (Character.isDigit(providedPath.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }   
     public boolean validatePath(String providedPath) {
         if (providedPath == null || providedPath.isEmpty()) {
             logger.error("Path cannot be empty.");
@@ -18,7 +26,7 @@ public class PathValidator {
         }
         String correctPath = solution.solveMaze(); 
 
-        if (!Character.isDigit(providedPath.charAt(0))){    //check if provided path is canonical or factorized
+        if (isCano(providedPath)){    //check if provided path is canonical or factorized
             providedPath = solution.factorizePath(providedPath);  
         }
         if (providedPath.equals(correctPath)) {
