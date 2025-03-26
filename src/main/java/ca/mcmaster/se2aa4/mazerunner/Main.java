@@ -47,7 +47,7 @@ public class Main {
                 } else {
                     // Solve the maze and print the canonical path
                     String path = solution.solveMaze();
-                    System.out.println("Path: " + path);
+                    System.out.println(path);
                     logger.info("Maze solved successfully!");
                 }
             } else {
